@@ -5,6 +5,7 @@ const DelegateInfo = () => {
   const { toast } = useToast();
 
   const handleRegisterNow = () => {
+    console.log("Register Now button clicked");
     toast({
       title: "Registration Opening Soon!",
       description: "Registration will open on 1st June 2025. We'll notify you when it's available.",
@@ -12,6 +13,7 @@ const DelegateInfo = () => {
   };
 
   const handleDownloadBrochure = () => {
+    console.log("Download Brochure button clicked");
     toast({
       title: "Downloading Brochure",
       description: "The conference brochure will be available for download soon.",
@@ -19,9 +21,12 @@ const DelegateInfo = () => {
   };
 
   const handleWhatsIncluded = () => {
+    console.log("What's Included button clicked");
     const element = document.getElementById('whats-included');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.log("Element 'whats-included' not found");
     }
   };
   return (
