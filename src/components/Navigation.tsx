@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Home, Info, Users, User, Building, Mail } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,84 +15,124 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#committees', label: 'Committees' },
-    { href: '#delegate-info', label: 'Delegate Info' },
-    { href: '#venue', label: 'Venue' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#home', label: 'Home', icon: Home },
+    { href: '#about', label: 'About', icon: Info },
+    { href: '#committees', label: 'Committees', icon: Users },
+    { href: '#delegate-info', label: 'Delegate Info', icon: User },
+    { href: '#venue', label: 'Venue', icon: Building },
+    { href: '#contact', label: 'Contact', icon: Mail },
   ];
 
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+    // Smooth scroll to section
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/95 backdrop-blur-md luxury-shadow' : 'bg-transparent'
-    }`}>
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-serif font-bold text-lg">S</span>
-            </div>
-            <div className="hidden sm:block">
-              <div className="font-serif font-semibold text-lg text-primary">SMUN</div>
-              <div className="text-xs text-muted-foreground -mt-1">Samvidhanam</div>
-            </div>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-foreground hover:text-accent transition-colors duration-200 font-medium"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="hidden sm:block">
-            <Button variant="default" className="bg-gradient-to-r from-accent to-saffron-600 hover:from-saffron-600 hover:to-accent text-accent-foreground font-semibold">
-              Register Now
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden bg-background border-t border-border">
-            <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="block text-foreground hover:text-accent transition-colors duration-200 font-medium py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <div className="pt-4">
-                <Button variant="default" className="w-full bg-gradient-to-r from-accent to-saffron-600 hover:from-saffron-600 hover:to-accent text-accent-foreground font-semibold">
-                  Register Now
-                </Button>
+    <>
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div 
+          className={`${
+            isScrolled 
+              ? 'bg-primary/50 backdrop-blur-xl border-b border-primary-foreground/10 shadow-lg' 
+              : 'bg-transparent'
+          } transition-all duration-300`}
+        >
+          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`group z-50 ${isMobileMenuOpen ? 'open' : ''}`}
+            >
+              <div className="space-y-1.5">
+                <span className={`block w-6 h-0.5 bg-primary-foreground transition-all duration-300 ${
+                  isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+                }`}></span>
+                <span className={`block w-6 h-0.5 bg-primary-foreground transition-all duration-300 ${
+                  isMobileMenuOpen ? 'opacity-0' : ''
+                }`}></span>
+                <span className={`block w-6 h-0.5 bg-primary-foreground transition-all duration-300 ${
+                  isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                }`}></span>
               </div>
+            </button>
+
+            {/* Centered Logo */}
+            <div className="absolute left-1/2 -translate-x-1/2">
+              <a 
+                href="#home" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('#home');
+                }}
+                className="flex items-center justify-center h-12 w-12 bg-primary-foreground/10 rounded-full border border-primary-foreground/20 shadow-md hover:scale-105 transition-transform duration-300"
+              >
+                <span className="font-serif text-2xl font-bold text-accent">S</span>
+              </a>
             </div>
+
+            {/* Register Button */}
+            <a 
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeMd6J4r_huRkDZuuLHkdyqLBwlpr1sw7fJfM_ISHdeqEX5-A/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-accent-foreground py-2 px-3 rounded-full bg-gradient-to-r from-accent to-saffron-600 shadow-lg transition-all hover:shadow-xl hover:scale-105 whitespace-nowrap glow-shadow"
+            >
+              Register Now
+            </a>
           </div>
-        )}
+        </div>
+      </header>
+
+      {/* Mobile Sidebar Overlay */}
+      <div 
+        className={`fixed inset-0 z-40 transition-transform duration-500 ease-in-out ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        {/* Backdrop */}
+        <div 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        ></div>
+
+        {/* Sidebar */}
+        <nav className="relative z-10 w-4/5 max-w-sm h-full bg-primary shadow-2xl flex flex-col pt-24 px-6">
+          <ul className="flex flex-col space-y-2">
+            {navItems.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <li key={item.href}>
+                  <a 
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.href);
+                    }}
+                    className="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground transition-all duration-200 group"
+                  >
+                    <IconComponent className="w-5 h-5 text-accent" />
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Footer text in sidebar */}
+          <div className="mt-auto mb-6 text-center">
+            <p className="text-sm text-primary-foreground/50">
+              4-5 October 2025 • <span className="font-bold text-accent">Auro University</span>
+            </p>
+          </div>
+        </nav>
       </div>
-    </nav>
+    </>
   );
 };
 
