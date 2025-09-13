@@ -1,6 +1,29 @@
 import React from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 const DelegateInfo = () => {
+  const { toast } = useToast();
+
+  const handleRegisterNow = () => {
+    toast({
+      title: "Registration Opening Soon!",
+      description: "Registration will open on 1st June 2025. We'll notify you when it's available.",
+    });
+  };
+
+  const handleDownloadBrochure = () => {
+    toast({
+      title: "Downloading Brochure",
+      description: "The conference brochure will be available for download soon.",
+    });
+  };
+
+  const handleWhatsIncluded = () => {
+    const element = document.getElementById('whats-included');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <section 
       className="relative flex h-auto min-h-screen w-full flex-col bg-[#0D0F2B] justify-between overflow-x-hidden"
@@ -91,7 +114,7 @@ const DelegateInfo = () => {
         </div>
 
         {/* What's Included */}
-        <div className="px-4 py-8 bg-[#1A1D4F]/30">
+        <div id="whats-included" className="px-4 py-8 bg-[#1A1D4F]/30">
           <h2 className="text-white text-3xl font-bold leading-tight tracking-tight px-4 pb-6" style={{ fontFamily: '"Newsreader", serif' }}>
             What's Included
           </h2>
@@ -147,7 +170,10 @@ const DelegateInfo = () => {
               <p className="text-[#FFB300] text-xl font-bold mt-1">
                 ₹2,500 <span className="text-white/60 font-normal text-sm">per delegate</span>
               </p>
-              <button className="mt-4 text-sm font-bold text-white bg-white/10 py-2 px-4 rounded-lg hover:bg-white/20 transition-colors">
+              <button 
+                className="mt-4 text-sm font-bold text-white bg-white/10 py-2 px-4 rounded-lg hover:bg-white/20 transition-colors"
+                onClick={handleWhatsIncluded}
+              >
                 What's Included
               </button>
             </div>
@@ -200,10 +226,14 @@ const DelegateInfo = () => {
           <button 
             className="w-full flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 text-[#1A1D4F] text-base font-bold leading-normal tracking-wide shadow-lg shadow-[#FFB300]/30 hover:shadow-xl hover:shadow-[#FFB300]/40 transition-shadow"
             style={{ backgroundImage: "linear-gradient(to right, #FFB300, #FFC300)" }}
+            onClick={handleRegisterNow}
           >
             <span className="truncate">Register Now</span>
           </button>
-          <button className="w-full flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-transparent border-2 border-[#FFB300]/50 text-white text-base font-bold leading-normal tracking-wide hover:border-[#FFB300] transition-colors">
+          <button 
+            className="w-full flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-transparent border-2 border-[#FFB300]/50 text-white text-base font-bold leading-normal tracking-wide hover:border-[#FFB300] transition-colors"
+            onClick={handleDownloadBrochure}
+          >
             <span className="truncate">Download Brochure</span>
           </button>
         </div>
