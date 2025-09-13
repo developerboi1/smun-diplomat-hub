@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { CalendarDays, MapPin, Users, Trophy } from 'lucide-react';
 import heroImage from '@/assets/auro-university-hero.jpg';
 
 const Hero = () => {
@@ -35,101 +33,104 @@ const Hero = () => {
   }, []);
 
   const stats = [
-    { icon: Users, value: '500+', label: 'Delegates Expected' },
-    { icon: Trophy, value: '6', label: 'Committees' },
-    { icon: CalendarDays, value: '2', label: 'Days of Impact' },
+    { value: '500+', label: 'Delegates' },
+    { value: '6', label: 'Committees' },
+    { value: '2', label: 'Days' },
+  ];
+
+  const countdownItems = [
+    { value: timeLeft.days, label: 'Days' },
+    { value: timeLeft.hours.toString().padStart(2, '0'), label: 'Hours' },
+    { value: timeLeft.minutes.toString().padStart(2, '0'), label: 'Minutes' },
+    { value: timeLeft.seconds.toString().padStart(2, '0'), label: 'Seconds' },
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">{/* Add padding top for both desktop and mobile header */}
-      {/* Background Image with Overlay */}
+    <section id="home" className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-16">
+      {/* Background Image with Overlays */}
       <div className="absolute inset-0">
         <img 
           src={heroImage} 
           alt="Auro University Campus" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-accent/20"></div>
+        {/* Primary Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/50 to-transparent z-10"></div>
+        {/* Bottom Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center text-primary-foreground">
-        <div className="max-w-4xl mx-auto space-y-8 animate-fade-up">
-          {/* Main Headline */}
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-balance leading-tight">
-              Samvidhanam Model United Nations
+      {/* Main Hero Content */}
+      <div className="relative z-20 flex-1 flex flex-col justify-center">
+        <div className="relative h-[60vh] min-h-[400px] w-full flex flex-col justify-end overflow-hidden">
+          <div className="relative z-20 flex flex-col items-center justify-center text-center p-4 text-primary-foreground">
+            <h1 className="text-primary-foreground tracking-tight text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight font-serif">
+              Samvidhanam
             </h1>
-            <div className="text-xl md:text-2xl font-medium text-primary-foreground/90">
-              Gujarat's Most Premium MUN Conference
-            </div>
-          </div>
-
-          {/* Event Details */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-lg font-medium">
-            <div className="flex items-center gap-2">
-              <CalendarDays className="w-5 h-5 text-accent" />
-              <span>4–5 October 2025</span>
-            </div>
-            <div className="hidden sm:block text-primary-foreground/50">•</div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-accent" />
-              <span>Auro University, Surat</span>
-            </div>
-          </div>
-
-          {/* Tagline */}
-          <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-3xl mx-auto text-balance">
-            Where Diplomacy Meets Leadership — Empowering students to lead with knowledge and kindness
-          </p>
-
-          {/* Countdown Timer */}
-          <div className="bg-background/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-primary-foreground/20">
-            <div className="text-sm md:text-base font-medium text-primary-foreground/80 mb-4">
-              Event Countdown
-            </div>
-            <div className="grid grid-cols-4 gap-4 md:gap-8">
-              {Object.entries(timeLeft).map(([unit, value]) => (
-                <div key={unit} className="text-center">
-                  <div className="text-2xl md:text-4xl font-bold text-accent">{value}</div>
-                  <div className="text-xs md:text-sm font-medium text-primary-foreground/70 capitalize">
-                    {unit}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-accent to-saffron-600 hover:from-saffron-600 hover:to-accent text-accent-foreground font-semibold text-lg px-8 py-6 glow-shadow"
-            >
-              Register Now - ₹3,200
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-lg px-8 py-6"
-            >
-              Learn More
-            </Button>
+            <h2 className="text-primary-foreground tracking-tight text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mt-1 font-serif">
+              Model United Nations
+            </h2>
+            <p className="text-primary-foreground/90 text-lg md:text-xl font-normal leading-normal mt-4">
+              Gujarat&apos;s Most Premium MUN Conference
+            </p>
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-full max-w-4xl">
-          <div className="grid grid-cols-3 gap-4 md:gap-8 bg-background/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-primary-foreground/20">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-accent mx-auto mb-2" />
-                <div className="text-lg md:text-2xl font-bold text-primary-foreground">{stat.value}</div>
-                <div className="text-xs md:text-sm font-medium text-primary-foreground/70">{stat.label}</div>
+        {/* Countdown Timer */}
+        <div className="relative z-20 -mt-16 px-4">
+          <div className="flex gap-3 justify-center text-primary-foreground text-center">
+            {countdownItems.map((item, index) => (
+              <div key={index} className="flex flex-col items-center gap-1">
+                <div className="h-16 w-16 md:h-20 md:w-20 flex items-center justify-center rounded-full bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 shadow-lg">
+                  <p className="text-2xl md:text-4xl font-bold">{item.value}</p>
+                </div>
+                <p className="text-xs font-normal leading-normal text-primary-foreground/70">{item.label}</p>
               </div>
             ))}
           </div>
         </div>
+
+        {/* Event Details */}
+        <p className="text-primary-foreground text-center text-base md:text-lg font-normal leading-normal mt-6 px-4">
+          4-5 October 2025 | Auro University, Surat
+        </p>
+
+        {/* Action Buttons */}
+        <div className="flex justify-center mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 px-4 w-full max-w-md">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeMd6J4r_huRkDZuuLHkdyqLBwlpr1sw7fJfM_ISHdeqEX5-A/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-full items-center justify-center rounded-lg h-12 px-6 bg-gradient-to-r from-accent to-saffron-600 text-accent-foreground text-base font-bold leading-normal tracking-wide shadow-[0_0_20px_rgba(255,179,0,0.5)] hover:shadow-[0_0_30px_rgba(255,179,0,0.8)] transition-shadow duration-300"
+            >
+              Register Now
+            </a>
+            <button className="flex w-full items-center justify-center rounded-lg h-12 px-6 bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 text-primary-foreground text-base font-bold leading-normal tracking-wide transition-colors hover:bg-primary-foreground/20">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-3 gap-4 p-4 mt-6 max-w-lg mx-auto">
+          {stats.map((stat, index) => (
+            <div key={index} className="flex flex-col items-center justify-center gap-1 rounded-lg p-4 bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10">
+              <p className="text-accent tracking-tight text-2xl md:text-3xl font-bold">{stat.value}</p>
+              <p className="text-primary-foreground/80 text-sm font-medium leading-normal text-center">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Tagline */}
+        <p className="text-accent text-lg md:text-xl font-medium leading-normal mt-4 px-4 text-center tracking-wider">
+          &quot;Where Diplomacy Meets Leadership&quot;
+        </p>
+
+        {/* Empowering message */}
+        <p className="text-primary-foreground/90 text-base md:text-lg text-center mt-2 px-4 max-w-4xl mx-auto">
+          Empowering students to lead with knowledge and kindness
+        </p>
       </div>
     </section>
   );
