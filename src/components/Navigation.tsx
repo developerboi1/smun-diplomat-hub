@@ -34,8 +34,8 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      {/* Header - Mobile Only */}
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 lg:hidden">
         <div 
           className={`${
             isScrolled 
