@@ -8,33 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* SMUN Brand Colors - Deep Navy Indigo & Saffron */
+    --background: 42 15% 96%;
+    --foreground: 234 47% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 42 15% 98%;
+    --card-foreground: 234 47% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 42 15% 98%;
+    --popover-foreground: 234 47% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 234 47% 15%;
+    --primary-foreground: 42 15% 96%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 42 100% 85%;
+    --secondary-foreground: 234 47% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 42 15% 92%;
+    --muted-foreground: 234 20% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 42 100% 50%;
+    --accent-foreground: 234 47% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 42 15% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 234 15% 85%;
+    --input: 234 15% 85%;
+    --ring: 42 100% 50%;
+
+    /* SMUN Design System */
+    --navy-50: 234 47% 95%;
+    --navy-100: 234 47% 85%;
+    --navy-900: 234 47% 15%;
+    --saffron-50: 42 100% 95%;
+    --saffron-500: 42 100% 50%;
+    --saffron-600: 42 100% 45%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(234 47% 25%));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(42 100% 60%));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(42 15% 98%));
+
+    /* Shadows */
+    --shadow-luxury: 0 20px 50px -10px hsl(var(--primary) / 0.1);
+    --shadow-glow: 0 0 40px hsl(var(--accent) / 0.2);
+
+    /* Typography */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
 
     --radius: 0.5rem;
 
@@ -100,6 +122,74 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .accent-gradient {
+    background: var(--gradient-accent);
+  }
+
+  .subtle-gradient {
+    background: var(--gradient-subtle);
+  }
+
+  .luxury-shadow {
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .glow-shadow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.4s ease-out forwards;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
