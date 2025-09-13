@@ -34,8 +34,61 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Header - Mobile Only */}
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 lg:hidden">
+      {/* Desktop Header */}
+      <header className="hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div 
+          className={`${
+            isScrolled 
+              ? 'bg-primary/50 backdrop-blur-xl border-b border-primary-foreground/10 shadow-lg' 
+              : 'bg-transparent'
+          } transition-all duration-300`}
+        >
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              {/* Desktop Logo */}
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-accent to-saffron-600 rounded-lg flex items-center justify-center">
+                  <span className="text-accent-foreground font-serif font-bold text-lg">S</span>
+                </div>
+                <div>
+                  <div className="font-serif font-semibold text-lg text-primary-foreground">SMUN</div>
+                  <div className="text-xs text-primary-foreground/80 -mt-1">Samvidhanam</div>
+                </div>
+              </div>
+
+              {/* Desktop Navigation */}
+              <nav className="flex items-center space-x-8">
+                {navItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.href);
+                    }}
+                    className="text-primary-foreground/90 hover:text-accent transition-colors duration-200 font-medium"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+
+              {/* Desktop Register Button */}
+              <a 
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeMd6J4r_huRkDZuuLHkdyqLBwlpr1sw7fJfM_ISHdeqEX5-A/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-bold text-accent-foreground py-3 px-6 rounded-full bg-gradient-to-r from-accent to-saffron-600 shadow-lg transition-all hover:shadow-xl hover:scale-105 glow-shadow"
+              >
+                Register Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Header */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div 
           className={`${
             isScrolled 
@@ -62,7 +115,7 @@ const Navigation = () => {
               </div>
             </button>
 
-            {/* Centered Logo */}
+            {/* Mobile Centered Logo */}
             <div className="absolute left-1/2 -translate-x-1/2">
               <a 
                 href="#home" 
@@ -76,7 +129,7 @@ const Navigation = () => {
               </a>
             </div>
 
-            {/* Register Button */}
+            {/* Mobile Register Button */}
             <a 
               href="https://docs.google.com/forms/d/e/1FAIpQLSeMd6J4r_huRkDZuuLHkdyqLBwlpr1sw7fJfM_ISHdeqEX5-A/viewform"
               target="_blank"

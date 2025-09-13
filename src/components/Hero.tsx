@@ -41,7 +41,7 @@ const Hero = () => {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden lg:pt-0 pt-16">{/* Remove pt-16 for desktop, keep for mobile */}
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">{/* Add padding top for both desktop and mobile header */}
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img 
